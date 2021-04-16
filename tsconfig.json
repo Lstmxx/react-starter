@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "baseUrl": "src",
+    "esModuleInterop": true,
+    "paths": {
+        "@utils/*": ["utils/*"],
+        "@apis/*": ["apis/*"],
+        "@routes/*": ["routes/*"],
+        "@components/*": ["components/*"],
+        "@styles/*": ["utils/*"],
+        "@/*": ["/*"],
+    },
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
