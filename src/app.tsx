@@ -4,7 +4,7 @@ import { isDate } from '@utils/is'
 import React from 'react'
 
 const app: React.FC<{}> = function() {
-  const result = { key: 'helo'}
+  const result = { key: 'helosdfdsf'}
   console.log(result)
   return (
     <div>

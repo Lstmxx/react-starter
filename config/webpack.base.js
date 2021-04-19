@@ -1,5 +1,6 @@
 const path = require('path')
 const devMode = process.env.NODE_ENV !== 'production'
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 function resolve(relatedPath) {
   return path.join(__dirname, relatedPath)
 }
@@ -29,10 +30,36 @@ const webpackBaseConfig = {
   module: {
     rules: [
       {
-        test: /\.ts[x]?$/,
+        test: /\.[jt]s[x]?$/,
         exclude: /node_modules/,
-        include: [resolve('../src')],
-        use: ['ts-loader']
+        use: {
+          loader: "babel-loader",
+          options: {
+            cacheDirectory: true,
+            babelrc: true
+            // presets: [
+            //   [
+            //     "@babel/preset-env",
+            //     { targets: { browsers: "last 2 versions" } } // or whatever your project requires
+            //   ],
+            //   "@babel/preset-react",
+            //   "@babel/preset-typescript"
+            // ],
+            // plugins: [
+            //   ["@babel/plugin-transform-runtime",{
+            //     "absoluteRuntime": false,
+            //     "corejs": 2,
+            //     "helpers": true,
+            //     "regenerator": true,
+            //     "useESModules": false
+            //   }],
+            //   // plugin-proposal-decorators is only needed if you're using experimental decorators in TypeScript
+            //   // ["@babel/plugin-proposal-decorators", { legacy: true }],
+            //   // ["@babel/plugin-proposal-class-properties", { loose: true }],
+            //   "react-hot-loader/babel"
+            // ]
+          }
+        }
       },
       {
         test: /\.css$/i,
@@ -47,7 +74,10 @@ const webpackBaseConfig = {
         type: 'asset/resource',
       }
     ]
-  }
+  },
+  plugins: [
+    new ForkTsCheckerWebpackPlugin()
+  ]
 }
 
 module.exports = webpackBaseConfig
